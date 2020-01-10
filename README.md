@@ -1,3 +1,6 @@
+# Notes
+I am using Node version v12.14.1. This also worked in v10.
+
 # Purpose
 This demonstrates different ways to use the new import() in Node.js to
 dynamically import modules from the filesystem.
