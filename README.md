@@ -10,20 +10,32 @@ all of your specified modules being loaded; i.e.) in this example,
 modules alpha and beta should be loaded.
 
 # Use Cases
-As a note, I am using `import()` in a Node.js backend, as opposed to a front-end
-in the provided examples, since that is my use case.
+When I started one of my projects, I used babel on the backend so that I could
+use implement `import / export`. As a result, I am using `import()` in a 
+Node.js backend, as opposed to a front-end where it is most commonly seen. You 
+may find it way cleaner to simply use `require()` to import things dynamically.
+I took the liberty of showing the different ways I've discovered to import
+modules dynamically.
 
-I use some methods described here to dynamically import individual 
-`.graphql` typeDef files (plain text, that do not use graphql-tools or graphql-tag) 
-and join them into one cohesive schema manually.
+The reason I wanted to start loading modules dynamically is because of a 
+`graphql` project I startred. You'll commonly hear that the `typeDefs` are in one
+large file (which is apparently what facebook does).
 
-This can be desirable for some if you like to keep your project organized in a 
+This can be undesirable for some if you like to keep your project organized in a 
 "relative" structure. That is, if you wanted to keep all files relevant to each
 model in a corresponding  `/Models` directory, which would
-require you to find a way to break up and then import the `.graphql` files.
+require you to find a way to break up the `graphql schema`. If you are using
+`.graphql` files (plain text) instead of `graphql-tag` or `graphql-tools` to 
+build your schema in `template strings`, then you would then have
+to either:
+
+1. Import each `.graphql` schema statically and join them into one string before
+   passing it to the `graphql server` prior to initialization
+2. Import each `.graphql` schema `dynampically`, and join them the same way
 
 You can do this statically, but that can be a pain if you have many models,
-which is why I decided to use the dynamic `import()` feature.
+which is why I decided to look into using the dynamic `import()` feature and
+`require()`, the former of which is the easiest, cleanest way to do it.
 
 References:
 - https://nodejs.org/api/esm.html
