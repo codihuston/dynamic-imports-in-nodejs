@@ -2,7 +2,7 @@
 I am using Node version v12.14.1. This also worked in v10.
 
 # Purpose
-This demonstrates different ways to use the new import() in Node.js to
+This demonstrates how to use the new `import()` in Node.js in  different ways to
 dynamically import modules from the filesystem.
 
 The expected results when dynamically importing in a loop would result in
