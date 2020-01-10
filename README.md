@@ -34,10 +34,13 @@ References:
 
 # Expected Output
 ```
-yarn run start
-yarn run v1.19.1
+arn run v1.19.1
 $ babel-node index.js
-
+require example 1: WORKS AS EXPECTED
+ [
+  { default: { name: 'alpha module' } },
+  { default: { name: 'beta module' } }
+]
 ex 1 WORKS AS EXPECTED [
   { default: { name: 'alpha module' } },
   { default: { name: 'beta module' } }
@@ -58,8 +61,7 @@ promise example 1: DOES NOT WORK AS EXPECTED (returns the same module in    all 
  [ { name: 'beta module' }, { name: 'beta module' } ]
 promise example 2: WORKS AS EXPECTED (but at the cost of specifying extra    data in the import().then() resolver)
  [ { name: 'alpha module' }, { name: 'beta module' } ]
-promise example 2: WORKS AS EXPECTED
+promise example 3: WORKS AS EXPECTED
  [ { name: 'alpha module' }, { name: 'beta module' } ]
-
-Done in 1.53s.
+Done in 1.56s.
 ```

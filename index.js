@@ -24,7 +24,7 @@ function promiseExample1() {
           );
         }
       } catch (e) {
-        console.warn("Cannot dynamically load module:", e);
+        console.warn("SKIPPING: Cannot dynamically load module:", e);
       }
       i++;
     }
@@ -72,7 +72,7 @@ function promiseExample2() {
           );
         }
       } catch (e) {
-        console.warn("Cannot dynamically load module:", e);
+        console.warn("SKIPPING: Cannot dynamically load module:", e);
       }
       i++;
     }
@@ -121,7 +121,7 @@ function promiseExample3() {
             );
           }
         } catch (e) {
-          console.warn("Cannot dynamically load module:", e);
+          console.warn("SKIPPING: Cannot dynamically load module:", e);
         }
         i++;
       }
@@ -144,6 +144,30 @@ function promiseExample3() {
         });
     })();
   });
+}
+
+function requireExample1() {
+  const promises = [];
+  const modules = [];
+
+  let i = 0;
+  for (let dir of dirs) {
+    try {
+      // warn devs if module cannot be found
+      if (!existsSync(join(dir, "index.js"))) {
+        console.warn("WARNING: module does not exist for: ", dir);
+      } else {
+        // require is synchronous
+        const x = require(dir);
+        modules.push(x);
+      }
+    } catch (e) {
+      console.warn("SKIPPING: Cannot dynamically load module:", e);
+    }
+    i++;
+  }
+
+  return modules;
 }
 
 // this works
@@ -205,5 +229,7 @@ promiseExample2().then(res => {
 });
 
 promiseExample3().then(res => {
-  console.log("promise example 2: WORKS AS EXPECTED\n", res);
+  console.log("promise example 3: WORKS AS EXPECTED\n", res);
 });
+
+console.log("require example 1: WORKS AS EXPECTED\n", requireExample1());
